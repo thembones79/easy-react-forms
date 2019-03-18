@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import axios from "axios";
 import "./App.css";
 
@@ -29,31 +28,35 @@ class App extends Component {
   };
 
   handleSubmit = async () => {
-    const { name, company, email, phone, message } = this.state;
+    //const { name, company, email, phone, message } = this.state;
     try {
-      await axios.post(`https://afternoon-hamlet-86579.herokuapp.com/send`, {
-        name,
-        company,
-        email,
-        phone,
-        message
-      });
+      await axios.post(
+        `https://enigmatic-tor-81088.herokuapp.com/send`,
+        this.state
+      )
+      await function(response) {
+        console.log(response);
+      }
     } catch (err) {
-      //      console.log(err);
+      console.log(err);
     }
   };
 
   render() {
+    const { name, company, email, phone, message } = this.state;
     return (
       <div>
-        <form>
+        <form
+          method="POST"
+          action="https://enigmatic-tor-81088.herokuapp.com/send"
+        >
           <p>
             <label>Name</label>
             <input
               type="text"
               name="name"
-              value="name"
-              onChange={handleNameChange}
+              value={name}
+              onChange={this.handleNameChange}
             />
           </p>
           <p>
@@ -61,8 +64,8 @@ class App extends Component {
             <input
               type="text"
               name="company"
-              value="company"
-              onChange={handleCompanyChange}
+              value={company}
+              onChange={this.handleCompanyChange}
             />
           </p>
           <p>
@@ -70,8 +73,8 @@ class App extends Component {
             <input
               type="email"
               name="email"
-              value="email"
-              onChange={handleEmailChange}
+              value={email}
+              onChange={this.handleEmailChange}
             />
           </p>
           <p>
@@ -79,8 +82,8 @@ class App extends Component {
             <input
               type="text"
               name="phone"
-              value="phone"
-              onChange={handlePhoneChange}
+              value={phone}
+              onChange={this.handlePhoneChange}
             />
           </p>
           <p>
@@ -88,12 +91,13 @@ class App extends Component {
             <textarea
               name="message"
               rows="5"
-              value="message"
-              onChange={handleMessageChange}
+              value={message}
+              onChange={this.handleMessageChange}
             />
           </p>
           <p>
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={this.handleSubmit}>Submit</button>
+            <button type="submit">Submit2</button>
           </p>
         </form>
       </div>
