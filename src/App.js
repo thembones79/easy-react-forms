@@ -8,7 +8,9 @@ class App extends Component {
     company: "",
     email: "",
     phone: "",
-    message: ""
+    message: "",
+    sent: false,
+    buttonText: 'Send Message'
   };
 
   handleNameChange = event => {
@@ -27,8 +29,13 @@ class App extends Component {
     this.setState({ message: event.target.value });
   };
 
-  handleSubmit = async () => {
+  handleSubmit = async (e) => {
     //const { name, company, email, phone, message } = this.state;
+	e.preventDefault();
+	 this.setState({
+      buttonText: '...sending'
+    })
+	
     try {
       await axios.post(
         `https://enigmatic-tor-81088.herokuapp.com/send`,
@@ -37,10 +44,22 @@ class App extends Component {
       await function(response) {
         console.log(response);
       }
+	  this.setState({ sent: true }, this.resetForm());
     } catch (err) {
       console.log(err);
     }
   };
+  
+  resetForm = () => {
+    this.setState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    message: "",
+      buttonText: 'Message Sent'
+    })
+  }
 
   render() {
     const { name, company, email, phone, message } = this.state;
@@ -96,7 +115,7 @@ class App extends Component {
             />
           </p>
           <p>
-            <button onClick={this.handleSubmit}>Submit</button>
+            <button onClick={this.handleSubmit}>{this.state.buttonText}</button>
             <button type="submit">Submit2</button>
           </p>
         </form>
