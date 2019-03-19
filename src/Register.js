@@ -27,7 +27,7 @@ class Register extends Component {
   formHandler(formFields) {
     axios
       .post(
-        "https://crossorigin.me/https://enigmatic-tor-81088.herokuapp.com/send",
+        "https://enigmatic-tor-81088.herokuapp.com/send",
         formFields
       )
       .then(function(response) {
