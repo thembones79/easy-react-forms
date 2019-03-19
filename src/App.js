@@ -65,13 +65,14 @@ class App extends Component {
     const { name, company, email, phone, message } = this.state;
     return (
       <div>
-        <form>
+        <form className="magic-form" onSubmit={this.handleSubmit}>
           <p>
             <label>Name</label>
             <input
               type="text"
               name="name"
               value={name}
+              required
               onChange={this.handleNameChange}
             />
           </p>
@@ -81,6 +82,7 @@ class App extends Component {
               type="text"
               name="company"
               value={company}
+              required
               onChange={this.handleCompanyChange}
             />
           </p>
@@ -90,6 +92,7 @@ class App extends Component {
               type="email"
               name="email"
               value={email}
+              required
               onChange={this.handleEmailChange}
             />
           </p>
@@ -99,20 +102,23 @@ class App extends Component {
               type="text"
               name="phone"
               value={phone}
+              required
               onChange={this.handlePhoneChange}
             />
           </p>
           <p>
-            <h3>Message</h3>
+            <label>Message</label>
             <textarea
               name="message"
               rows="5"
               value={message}
+              required
               onChange={this.handleMessageChange}
             />
           </p>
+
           <p>
-            <button onClick={this.handleSubmit}>{this.state.buttonText}</button>
+            <button type="submit">{this.state.buttonText}</button>
           </p>
         </form>
       </div>
