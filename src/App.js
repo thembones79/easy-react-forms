@@ -10,7 +10,7 @@ class App extends Component {
     phone: "",
     message: "",
     sent: false,
-    buttonText: 'Send Message'
+    buttonText: "Send Message"
   };
 
   handleNameChange = event => {
@@ -29,46 +29,43 @@ class App extends Component {
     this.setState({ message: event.target.value });
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     //const { name, company, email, phone, message } = this.state;
-	e.preventDefault();
-	 this.setState({
-      buttonText: '...sending'
-    })
-	
+    e.preventDefault();
+    this.setState({
+      buttonText: "...sending"
+    });
+
     try {
       await axios.post(
         `https://enigmatic-tor-81088.herokuapp.com/send`,
         this.state
-      )
+      );
       await function(response) {
         console.log(response);
-      }
-	  this.setState({ sent: true }, this.resetForm());
+      };
+      this.setState({ sent: true }, this.resetForm());
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   resetForm = () => {
     this.setState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    message: "",
-      buttonText: 'Message Sent'
-    })
-  }
+      name: "",
+      company: "",
+      email: "",
+      phone: "",
+      message: "",
+      buttonText: "Message Sent"
+    });
+  };
 
   render() {
     const { name, company, email, phone, message } = this.state;
     return (
       <div>
-        <form
-          method="POST"
-          action="https://enigmatic-tor-81088.herokuapp.com/send"
-        >
+        <form>
           <p>
             <label>Name</label>
             <input
@@ -106,7 +103,7 @@ class App extends Component {
             />
           </p>
           <p>
-            <label>Message</label>
+            <h3>Message</h3>
             <textarea
               name="message"
               rows="5"
@@ -116,7 +113,6 @@ class App extends Component {
           </p>
           <p>
             <button onClick={this.handleSubmit}>{this.state.buttonText}</button>
-            <button type="submit">Submit2</button>
           </p>
         </form>
       </div>
